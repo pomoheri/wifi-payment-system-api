@@ -4,15 +4,15 @@ const User = require("../models/User");
 const { response } = require("../app");
 
 const login = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    if (!username || !password) {
-      return res.status(400).json({
-        status: false,
-        message: "Username dan Password wajib diisi",
-      });
-    }
+  if (!req.body || !req.body.username || !req.body.password) {
+    return res.status(422).json({
+      status: false,
+      message: "Username and password wajib diisi",
+    });
+  }
 
+  const { username, password } = req.body;
+  try {
     const user = await User.findOne({ where: { username } });
     if (!user) {
       return res.status(404).json({

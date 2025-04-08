@@ -14,7 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 const authRoutes = require("./routes/auth");
+const roleRoutes = require("./routes/role");
 
 app.use("/api/auth", authRoutes);
+app.use("/api/roles", roleRoutes);
 
 module.exports = app;
